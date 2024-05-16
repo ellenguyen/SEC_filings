@@ -167,7 +167,7 @@ def fetch_filing_data(cik, headers):
         df = pd.DataFrame()
 
         # SEC Edgar API endpoint
-        api_url = f"https://data.sec.gov/submissions/CIK{cik}.json"
+        api_url = f"https://data.sec.gov/submissions/CIK000{cik}.json"
 
         # Make the API request with timeout
         response = requests.get(api_url, headers=headers, timeout=20)
@@ -214,3 +214,7 @@ def fetch_filing_data(cik, headers):
     except KeyError as e:
         print(f"Key error: {e}")
         return None
+
+if __name__ == "__main__":
+    filtered_df = fetch_filing_data(1655887, {'User-Agent': 'Blue Owl Capital Corp II'})
+    filtered_df.to_csv('scraping_url.csv')
